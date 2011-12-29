@@ -27,7 +27,7 @@ import org.apache.struts.action.ActionForm;
  * struts-config.xml are not required):
  *
  * <pre>
- *   &lt;servlet-class>is.ida.strutsannotations.ActionServlet&lt;/servlet-class>
+ *   &lt;servlet-class>by.shade.strutsannotations.ActionServlet&lt;/servlet-class>
  *   &lt;!-- &lt;servlet-class>org.apache.struts.action.ActionServlet&lt;/servlet-class> -->
  * </pre>
  *
@@ -35,7 +35,7 @@ import org.apache.struts.action.ActionForm;
  *
  * <pre>
  * &lt;struts-config>
- *   &lt;plug-in className="is.ida.strutsannotations.plugin.StrutsAnnotationsPlugin" />
+ *   &lt;plug-in className="by.shade.strutsannotations.plugin.StrutsAnnotationsPlugin" />
  * &lt;/struts-config>
  * </pre>
  *

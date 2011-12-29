@@ -1,8 +1,8 @@
 package by.shade.strutsannotations.scanner.classes;
 
-import by.shade.strutsannotations.StrutsAction;
-
 import org.apache.struts.action.Action;
+
+import by.shade.strutsannotations.StrutsAction;
 
 /**
  * Filter for annotated Struts actions.
