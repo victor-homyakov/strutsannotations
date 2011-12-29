@@ -17,7 +17,7 @@ Insert into struts-config.xml near the end of file:
   </struts-config>
 }}}
 
-Now you can replace with annotations content of struts-config.xml:
+Now content of struts-config.xml:
 
 {{{
     <action path="/addMember" type="test.stuts.StrutsDemoAction"
