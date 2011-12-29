@@ -21,7 +21,7 @@ Now content of struts-config.xml:
 
 {{{
     <action path="/addMember" type="test.stuts.StrutsDemoAction"
-        name="strutsDemoForm" input="/addMemberForm.do" scope="request"
+        name="strutsDemoForm" input="/addMember.do" scope="request"
         parameter="a=b" validate="true">
       <forward name="success" path="/showMembers.do" redirect="true" />
       <forward name="failure" path="/addMember.do" />
@@ -32,7 +32,7 @@ can be pretty straightforward replaced with annotations:
 
 {{{
 @StrutsAction(path="/addMember", name="strutsDemoForm", form=StrutsDemoForm.class,
-  input="/addMemberForm.do", scope="request", parameter="a=b", validate=true)
+  input="/addMember.do", scope="request", parameter="a=b", validate=true)
 public class StrutsDemoAction extends Action {
 
   @StrutsForward(redirect=true)
