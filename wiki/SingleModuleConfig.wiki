@@ -31,7 +31,7 @@ Now you can replace with annotations content of struts-config.xml:
 can be pretty straightforward replaced with annotations:
 
 {{{
-@StrutsAction(path="/addMember", name="strutsDemoForm",
+@StrutsAction(path="/addMember", name="strutsDemoForm", form=StrutsDemoForm.class,
   input="/addMemberForm.do", scope="request", parameter="a=b", validate=true)
 public class StrutsDemoAction extends Action {
 
