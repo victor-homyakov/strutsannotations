@@ -79,7 +79,7 @@ Some examples.
 </struts-config>
 }}}
 
-*web.route.chiefrouteractions.action.ChiefRouterActionsForm*
+*`web.route.chiefrouteractions.action.ChiefRouterActionsForm`*
 {{{
 package web.route.chiefrouteractions.action;
 
@@ -105,7 +105,7 @@ public class ChiefRouterActionsAction extends EventDispatchAction {
         return mapping.findForward(CARDS);
     }
 
-    public ActionForward selectCard {
+    public ActionForward selectCard(...) {
         ...
         return mapping.findForward(SELECTED_CARD);
     }
