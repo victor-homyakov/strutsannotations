@@ -9,4 +9,4 @@
 
 In big project with many modules, JSPs, scripts and actions it is very hard to find the root cause of error `ERROR [RequestProcessor] Invalid path was requested` sometimes appearing in log files.
 
-`MoreDescriptiveRequestProcessor` overrides original RequestProcessor and mitigates this problem by printing additional request information: `request.getRequestURL()` and `request.getRequestURI()`.
+`MoreDescriptiveRequestProcessor` overrides original `RequestProcessor` and mitigates this problem by printing additional request information: `request.getRequestURL()` and `request.getRequestURI()`.
