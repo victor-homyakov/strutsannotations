@@ -44,9 +44,9 @@ public class StrutsDemoAction extends Action {
   ... execute(...) {
     try {
       ...
-      return SUCCESS;
+      return mapping.findForward(SUCCESS);
     } catch (Exception e) {
-      return FAILURE;
+      return mapping.findForward(FAILURE);
     }
   }
 }
