@@ -3,7 +3,7 @@ package by.shade.strutsannotations.scanner.classes;
 import java.io.File;
 
 /**
- * Incapsulates work with classPath and ClassLoader.
+ * Incapsulates methods working with classPath and ClassLoader.
  *
  * @author homyakov
  * @version $Id$

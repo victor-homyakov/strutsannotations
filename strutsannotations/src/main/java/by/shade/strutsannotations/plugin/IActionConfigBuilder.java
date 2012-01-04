@@ -3,7 +3,7 @@ package by.shade.strutsannotations.plugin;
 import org.apache.struts.config.ActionConfig;
 
 /**
- * Interface for builders of ActionConfig.
+ * Interface of ActionConfig builders.
  *
  * @author homyakov
  * @version $Id$
@@ -16,17 +16,17 @@ public interface IActionConfigBuilder {
     ActionConfig actionConfig();
 
     /**
-     * @return parameter for ActionConfig
+     * @return <code>parameter</code> for ActionConfig
      */
     String parameter();
 
     /**
-     * @return path for ActionConfig
+     * @return <code>path</code> for ActionConfig
      */
     String path();
 
     /**
-     * @return type for ActionConfig
+     * @return <code>type</code> for ActionConfig
      */
     String type();
 

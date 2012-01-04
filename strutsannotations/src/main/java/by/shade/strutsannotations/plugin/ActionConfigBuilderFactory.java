@@ -4,7 +4,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.actions.EventDispatchAction;
 
 /**
- * Retrieve builder of ActionConfig for specific Action.
+ * Retrieve builder of ActionConfig for specific Action class.
  *
  * @author homyakov
  * @version $Id$

@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 
 /**
- * Create ActionConfig for Action class and its annotation.
+ * Create ActionConfig for annotated Action class.
  *
  * @author homyakov
  * @version $Id$

@@ -21,11 +21,11 @@ public final class StrutsAnnotationsScanner {
     }
 
     /**
-     * Searches for annotated actions.
+     * Search for annotated actions.
      *
      * @param classPath
      *            class path
-     * @return list of actions found
+     * @return list of annotated actions found in class loader
      * @throws ClassNotFoundException
      *             on class loader errors
      */
@@ -36,11 +36,11 @@ public final class StrutsAnnotationsScanner {
     }
 
     /**
-     * Searches for annotated fields.
+     * Search for annotated fields.
      *
      * @param clazz
      *            class to search in
-     * @return list of fields found
+     * @return list of annotated fields found in class
      */
     public static Collection<Field> findFields(final Class<? extends Action> clazz) {
         return new FieldScanner(clazz).list(new ForwardFieldFilter());

@@ -12,7 +12,7 @@ import by.shade.strutsannotations.scanner.methods.EventDispatchMethodFilter;
 import by.shade.strutsannotations.scanner.methods.MethodScanner;
 
 /**
- * Builds ActionConfig for EventDispatchAction.
+ * Builds ActionConfig for annotated EventDispatchAction.
  *
  * @author homyakov
  * @version $Id$
@@ -37,11 +37,11 @@ public class EventDispatchActionConfigBuilder extends
     }
 
     /**
-     * Returns parameter, if defined in annotation. If parameter is not defined in annotation,
+     * Returns <code>parameter</code>, if defined in annotation. If <code>parameter</code> is not defined in annotation,
      * returns list of all possible methods. Default method is taken from annotation's
-     * defaultMethod.
+     * <code>defaultMethod</code>.
      *
-     * @return parameter for EventDispatchAction
+     * @return <code>parameter</code> for EventDispatchAction
      */
     @Override
     public String parameter() {

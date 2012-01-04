@@ -26,7 +26,7 @@ public class ForwardConfigBuilder {
     private final String path;
 
     /**
-     * Prepares creation of ForwardConfig: retrieves annotation, sets field access permission.
+     * Prepare creation of ForwardConfig: retrieve annotation, set field access permission.
      *
      * @param field
      *            annotated field (should be static final String)
