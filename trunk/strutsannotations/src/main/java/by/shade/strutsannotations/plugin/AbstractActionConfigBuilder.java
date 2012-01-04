@@ -66,7 +66,7 @@ public abstract class AbstractActionConfigBuilder<T> implements IActionConfigBui
     }
 
     /**
-     * @return parameter for ActionConfig, if defined in annotation, or null
+     * @return <code>parameter</code> for ActionConfig, if defined in annotation, or null
      */
     public String parameter() {
         final String param = annotation.parameter();
@@ -74,7 +74,7 @@ public abstract class AbstractActionConfigBuilder<T> implements IActionConfigBui
     }
 
     /**
-     * @return path for ActionConfig
+     * @return <code>path</code> for ActionConfig
      */
     public String path() {
         String path = annotation.path();
@@ -82,7 +82,7 @@ public abstract class AbstractActionConfigBuilder<T> implements IActionConfigBui
     }
 
     /**
-     * @return type for ActionConfig (also canonical name of Action class)
+     * @return <code>type</code> for ActionConfig (canonical name of Action class)
      */
     public String type() {
         return clazz.getCanonicalName();
