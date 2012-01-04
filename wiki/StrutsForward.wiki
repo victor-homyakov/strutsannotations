@@ -1,13 +1,19 @@
-#summary One-sentence summary of this page.
+#summary Annotation for Struts Forward.
 
 = Introduction =
 
-Add your content here.
+Describes an ActionForward that is to be made available to an Action as a return value. An
+ActionForward is referenced by a logical name and encapsulates a URI. Instead of deprecated
+contextRelative="true" use module="/some_module".
 
 
 = Details =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Replacement for <action><forward ... /></action> elements of struts-config.xml.
+
+Should be used on static final String fields.
+
+Default values:
+  * path: value of the annotated String
+  * module: current module
+  * redirect: false
