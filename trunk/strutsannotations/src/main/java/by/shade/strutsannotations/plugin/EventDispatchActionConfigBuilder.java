@@ -21,6 +21,8 @@ import by.shade.strutsannotations.scanner.methods.MethodScanner;
 public class EventDispatchActionConfigBuilder extends
         AbstractActionConfigBuilder<EventDispatchAction> {
 
+    private static final String MESSAGE = "Annotated EventDispatchAction: ";
+
     /** Commons logging instance. */
     private static final Log LOG = LogFactory.getLog(EventDispatchActionConfigBuilder.class);
 
@@ -34,7 +36,7 @@ public class EventDispatchActionConfigBuilder extends
     public EventDispatchActionConfigBuilder(final Class<? extends EventDispatchAction> clazz) {
         super(clazz);
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Annotated EventDispatchAction: " + clazz);
+            LOG.debug(MESSAGE + clazz);
         }
     }
 
@@ -51,7 +53,7 @@ public class EventDispatchActionConfigBuilder extends
             final StrutsAction annotation) {
         super(clazz, annotation);
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Annotated EventDispatchAction: " + clazz);
+            LOG.debug(MESSAGE + clazz);
         }
     }
 

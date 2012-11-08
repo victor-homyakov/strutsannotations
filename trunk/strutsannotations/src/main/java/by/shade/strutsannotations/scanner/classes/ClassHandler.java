@@ -20,6 +20,15 @@ public class ClassHandler {
         this.classLoader = classLoader;
     }
 
+    /**
+     * Loads the class from the specified file.
+     *
+     * @param file
+     *            binary class file
+     * @return the resulting Class object
+     * @throws ClassNotFoundException
+     *             if the class was not found
+     */
     public Class<?> toClassDefinition(File file) throws ClassNotFoundException {
         final String name = toQualifiedClassName(file);
         return classLoader.loadClass(name);
@@ -33,6 +42,11 @@ public class ClassHandler {
         // if (LOG.isDebugEnabled()) {LOG.debug("File " + name);}
     }
 
+    /**
+     * @param file
+     *            file
+     * @return true if file has binary class extension {@value #DOT_CLASS}
+     */
     public boolean hasClassExtension(File file) {
         return file.getName().endsWith(DOT_CLASS);
     }

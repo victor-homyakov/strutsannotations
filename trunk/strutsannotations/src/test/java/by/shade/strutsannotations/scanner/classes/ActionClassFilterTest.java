@@ -2,6 +2,7 @@ package by.shade.strutsannotations.scanner.classes;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -38,7 +39,7 @@ public class ActionClassFilterTest {
                 return new File(URLDecoder.decode(url.getPath(), "UTF-8"));
             } catch (UnsupportedEncodingException e2) {
                 // this should not happen
-                throw new RuntimeException(e2);
+                throw new RuntimeException(e2); // NOPMD
             }
         }
     }
@@ -51,7 +52,7 @@ public class ActionClassFilterTest {
 
     @Test
     public void testFilter() {
-        assertTrue(list.size() == 2);
+        assertEquals("Should find 2 annotated classes", 2, list.size());
 
         assertPassed(ClassAction.class);
         assertPassed(ClassActions.class);
@@ -61,12 +62,13 @@ public class ActionClassFilterTest {
         assertRejected(ClassWithAnnotation.class);
     }
 
-    private void assertPassed(Class<?> annotation) {
-        assertTrue(list.contains(annotation));
+    private void assertPassed(Class<?> clazz) {
+        assertTrue("List of annotated classes should contain class " + clazz, list.contains(clazz));
     }
 
-    private void assertRejected(Class<?> annotation) {
-        assertFalse(list.contains(annotation));
+    private void assertRejected(Class<?> clazz) {
+        assertFalse("List of annotated classes should not contain class " + clazz,
+                list.contains(clazz));
     }
 
 }
