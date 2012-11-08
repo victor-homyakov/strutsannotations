@@ -24,28 +24,39 @@ public class ClassScanner {
     private final File root;
 
     /**
+     * Create class scanner. Uses context ClassLoader for this Thread to load found classes.
      *
      * @param classPath
-     *            class path
+     *            class path, should point to existing directory
+     * @param rootPackage
+     *            package to start scan from
+     */
+    public ClassScanner(final File classPath, final String rootPackage) {
+        this(classPath, Thread.currentThread().getContextClassLoader(), rootPackage);
+    }
+
+    /**
+     * Create class scanner. Uses ClassLoader passed as argument to load found classes.
+     *
+     * @param classPath
+     *            class path, should point to existing directory
      * @param classLoader
      *            class loader to load found classes
      * @param rootPackage
      *            package to start scan from
      */
-    public ClassScanner(final String classPath, final ClassLoader classLoader,
+    public ClassScanner(final File classPath, final ClassLoader classLoader,
             final String rootPackage) {
-        classHandler = new ClassHandler(classPath, classLoader);
-
-        final File file = new File(classPath);
-        if (!file.exists()) {
+        if (!classPath.exists()) {
             throw new IllegalArgumentException(classPath + " doesn't exist");
         }
-        if (!file.isDirectory()) {
+        if (!classPath.isDirectory()) {
             throw new IllegalArgumentException(classPath + " is not a directory");
         }
 
+        classHandler = new ClassHandler(classPath, classLoader);
         final String path = rootPackage.replace('.', File.separatorChar);
-        root = new File(file, path);
+        root = new File(classPath, path);
         if (!root.exists()) {
             throw new IllegalArgumentException(rootPackage
                     + " package doesn't exist under classpath " + classPath);

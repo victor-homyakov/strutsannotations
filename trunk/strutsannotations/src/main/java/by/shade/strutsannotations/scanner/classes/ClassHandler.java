@@ -15,27 +15,25 @@ public class ClassHandler {
     private final String classPath;
     private final ClassLoader classLoader;
 
-    public ClassHandler(String classPath, ClassLoader classLoader) {
-        this.classPath = classPath;
+    public ClassHandler(File classPath, ClassLoader classLoader) {
+        this.classPath = classPath.getPath() + File.separator;
         this.classLoader = classLoader;
     }
 
-    public Class<?> toClassDefinition(final File file) throws ClassNotFoundException {
+    public Class<?> toClassDefinition(File file) throws ClassNotFoundException {
         final String name = toQualifiedClassName(file);
         return classLoader.loadClass(name);
     }
 
-    public String toQualifiedClassName(final File file) {
+    public String toQualifiedClassName(File file) {
         String name = file.getPath();
-        if (classPath.length() > 0) {
-            name = name.substring(classPath.length() + 1/*File.separator.length()*/);
-        }
-        name = name.substring(0, name.length() - DOT_CLASS.length());
-        return name.replace(File.separatorChar, '.');
+        int begin = name.startsWith(classPath) ? classPath.length() : 0;
+        int end = name.length() - DOT_CLASS.length();
+        return name.substring(begin, end).replace(File.separatorChar, '.');
         // if (LOG.isDebugEnabled()) {LOG.debug("File " + name);}
     }
 
-    public boolean hasClassExtension(final File file) {
+    public boolean hasClassExtension(File file) {
         return file.getName().endsWith(DOT_CLASS);
     }
 

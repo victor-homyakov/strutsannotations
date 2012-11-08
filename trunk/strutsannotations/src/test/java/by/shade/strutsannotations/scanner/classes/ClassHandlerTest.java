@@ -20,7 +20,8 @@ public class ClassHandlerTest {
 
     @Before
     public void setUp() {
-        classHandler = new ClassHandler("", Thread.currentThread().getContextClassLoader());
+        classHandler = new ClassHandler(new File(""), Thread.currentThread()
+                .getContextClassLoader());
     }
 
     /**
@@ -42,13 +43,20 @@ public class ClassHandlerTest {
      */
     @Test
     public void testToQualifiedClassName() {
-        assertFQCN("File", classHandler, "File.class");
-        assertFQCN("package.File", classHandler, "package/File.class");
+        assertFQCN("File1", classHandler, "File1.class");
+        assertFQCN("package1.File1", classHandler, "package1/File1.class");
 
-        classHandler = new ClassHandler("root", null);
-        assertFQCN("File", classHandler, "root/File.class");
-        assertFQCN("package.File", classHandler, "root/package/File.class");
-        assertFQCN("package.subpackage.File", classHandler, "root/package/subpackage/File.class");
+        classHandler = new ClassHandler(new File("root"), null);
+        assertFQCN("File2", classHandler, "root/File2.class");
+        assertFQCN("package2.File2", classHandler, "root/package2/File2.class");
+        assertFQCN("package2.subpackage2.File2", classHandler,
+                "root/package2/subpackage2/File2.class");
+
+        classHandler = new ClassHandler(new File("root/"), null);
+        assertFQCN("File3", classHandler, "root/File3.class");
+        assertFQCN("package3.File3", classHandler, "root/package3/File3.class");
+        assertFQCN("package3.subpackage3.File3", classHandler,
+                "root/package3/subpackage3/File3.class");
     }
 
     /**
@@ -59,6 +67,7 @@ public class ClassHandlerTest {
         assertFalse(classHandler.hasClassExtension(new File("")));
         assertFalse(classHandler.hasClassExtension(new File("File.java")));
         assertTrue(classHandler.hasClassExtension(new File("File.class")));
+        assertFalse(classHandler.hasClassExtension(new File("File.class.")));
     }
 
     private static void assertFQCN(String expected, ClassHandler handler, String path) {

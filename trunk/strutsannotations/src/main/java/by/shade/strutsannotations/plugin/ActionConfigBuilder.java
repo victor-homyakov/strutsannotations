@@ -14,6 +14,8 @@ import by.shade.strutsannotations.StrutsAction;
  */
 public class ActionConfigBuilder extends AbstractActionConfigBuilder<Action> {
 
+    private static final String ANNOTATED_ACTION = "Annotated Action: ";
+
     /** Commons logging instance. */
     private static final Log LOG = LogFactory.getLog(ActionConfigBuilder.class);
 
@@ -27,7 +29,7 @@ public class ActionConfigBuilder extends AbstractActionConfigBuilder<Action> {
     public ActionConfigBuilder(final Class<? extends Action> clazz) {
         super(clazz);
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Annotated Action: " + clazz);
+            LOG.debug(ANNOTATED_ACTION + clazz);
         }
     }
 
@@ -43,7 +45,7 @@ public class ActionConfigBuilder extends AbstractActionConfigBuilder<Action> {
     public ActionConfigBuilder(final Class<? extends Action> clazz, final StrutsAction annotation) {
         super(clazz, annotation);
         if (LOG.isDebugEnabled()) {
-            LOG.debug("Annotated Action: " + clazz);
+            LOG.debug(ANNOTATED_ACTION + clazz);
         }
     }
 

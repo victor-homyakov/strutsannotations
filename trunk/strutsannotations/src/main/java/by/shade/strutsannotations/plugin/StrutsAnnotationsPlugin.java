@@ -1,5 +1,6 @@
 package by.shade.strutsannotations.plugin;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
@@ -66,8 +67,8 @@ public class StrutsAnnotationsPlugin implements PlugIn {
                 + "'");
         try {
             if (actionClasses == null) {
-                actionClasses = StrutsAnnotationsScanner.findActions(servlet.getServletContext()
-                        .getRealPath("WEB-INF/classes"));
+                actionClasses = StrutsAnnotationsScanner.findActions(new File(servlet
+                        .getServletContext().getRealPath("WEB-INF/classes")));
                 LOG.info(actionClasses.size() + " annotated action classes found");
             }
             for (Class<?> clazz : actionClasses) {
