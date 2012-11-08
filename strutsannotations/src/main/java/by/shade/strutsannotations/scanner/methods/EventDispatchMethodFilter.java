@@ -28,29 +28,43 @@ public class EventDispatchMethodFilter implements IMethodFilter {
     /**
      * @param method
      *            method to test
-     * @return true for method with signature public ActionForward name(ActionMapping, ActionForm,
-     *         HttpServletRequest, HttpServletResponse)
+     * @return true for method with signature
+     *         <code>public ActionForward name(ActionMapping, ActionForm,
+     *         HttpServletRequest, HttpServletResponse)</code>
      */
-    public boolean methodMatches(final Method method) {
-        // test for "public ActionForward method(...)"
-        // (method may actually return ? extends ActionForward)
-        if (!Modifier.isPublic(method.getModifiers())
-                || !ActionForward.class.isAssignableFrom(method.getReturnType())) {
-            return false; // NOPMD
-        }
+    public boolean methodMatches(Method method) {
+        return testVisibility(method) && testReturnType(method) && testParameters(method);
+    }
 
-        // test for "method(ActionMapping, ActionForm, HttpServletRequest, HttpServletResponse)"
+    /**
+     * @return true for public method: <code>public {type} {name}({params})</code>
+     */
+    private static boolean testVisibility(Method method) {
+        return Modifier.isPublic(method.getModifiers());
+    }
+
+    /**
+     * @return true for method with {@link ActionForward} return type (method may actually return ?
+     *         extends ActionForward): <code>{visibility} ActionForward {name}({params})</code>
+     */
+    private static boolean testReturnType(Method method) {
+        return ActionForward.class.isAssignableFrom(method.getReturnType());
+    }
+
+    /**
+     * @return true for method with 4 desired parameters: <code>{visibility} {type} {name}
+     *         (ActionMapping, ActionForm, HttpServletRequest, HttpServletResponse)</code>
+     */
+    private static boolean testParameters(Method method) {
         final Class<?>[] parameterTypes = method.getParameterTypes();
         if (parameterTypes.length != PARAMETER_TYPES.length) {
-            return false; // NOPMD
+            return false;
         }
-
         for (int i = 0; i < parameterTypes.length; i++) {
             if (!parameterTypes[i].isAssignableFrom(PARAMETER_TYPES[i])) {
-                return false; // NOPMD
+                return false;
             }
         }
-
         return true;
     }
 
