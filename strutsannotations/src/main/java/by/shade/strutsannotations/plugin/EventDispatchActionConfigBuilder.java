@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.actions.EventDispatchAction;
 
+import by.shade.strutsannotations.StrutsAction;
 import by.shade.strutsannotations.scanner.methods.EventDispatchMethodFilter;
 import by.shade.strutsannotations.scanner.methods.MethodScanner;
 
@@ -18,13 +19,14 @@ import by.shade.strutsannotations.scanner.methods.MethodScanner;
  * @version $Id$
  */
 public class EventDispatchActionConfigBuilder extends
-        AbstractActionConfigBuilder<EventDispatchAction> implements IActionConfigBuilder {
+        AbstractActionConfigBuilder<EventDispatchAction> {
 
     /** Commons logging instance. */
     private static final Log LOG = LogFactory.getLog(EventDispatchActionConfigBuilder.class);
 
     /**
-     * Retrieves annotation.
+     * Create configuration builder for class with single StrutsAction annotation. Retrieve
+     * StrutsAction annotation from class.
      *
      * @param clazz
      *            class of EventDispatchAction
@@ -37,9 +39,26 @@ public class EventDispatchActionConfigBuilder extends
     }
 
     /**
-     * Returns <code>parameter</code>, if defined in annotation. If <code>parameter</code> is not defined in annotation,
-     * returns list of all possible methods. Default method is taken from annotation's
-     * <code>defaultMethod</code>.
+     * Create configuration builder for class with StrutsActions annotation (multiple StrutsAction
+     * annotations).
+     *
+     * @param clazz
+     *            class of EventDispatchAction
+     * @param annotation
+     *            desired StrutsAction annotation
+     */
+    public EventDispatchActionConfigBuilder(final Class<? extends EventDispatchAction> clazz,
+            final StrutsAction annotation) {
+        super(clazz, annotation);
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Annotated EventDispatchAction: " + clazz);
+        }
+    }
+
+    /**
+     * Returns <code>parameter</code>, if defined in annotation. If <code>parameter</code> is not
+     * defined in annotation, returns list of all possible methods. Default method is taken from
+     * annotation's <code>defaultMethod</code>.
      *
      * @return <code>parameter</code> for EventDispatchAction
      */

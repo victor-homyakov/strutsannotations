@@ -14,6 +14,7 @@ import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ModuleConfig;
 
 import by.shade.strutsannotations.StrutsAction;
+import by.shade.strutsannotations.StrutsActions;
 import by.shade.strutsannotations.scanner.StrutsAnnotationsScanner;
 
 /**
@@ -101,23 +102,21 @@ public class StrutsAnnotationsPlugin implements PlugIn {
      */
     private static void updateActionConfig(final Class<? extends Action> clazz,
             final ModuleConfig moduleConfig) throws IllegalAccessException {
-        final StrutsAction actionMapping = clazz.getAnnotation(StrutsAction.class);
-        if (actionMapping == null || !actionMapping.module().equals(moduleConfig.getPrefix())) {
-            return;
-        }
-
-        final ActionConfig actionConfig = ActionConfigBuilderFactory.getActionConfigBuilder(clazz)
-                .actionConfig();
-        updateFormBeanConfig(actionMapping, actionConfig, moduleConfig);
-
-        for (Field field : StrutsAnnotationsScanner.findFields(clazz)) {
-            updateForwardConfig(field, actionConfig);
-        }
-
-        moduleConfig.addActionConfig(actionConfig);
-
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("Added action mapping " + actionConfig);
+        for (StrutsAction actionMapping : getAnnotations(clazz)) {
+            if (actionMapping == null || !actionMapping.module().equals(moduleConfig.getPrefix())) {
+                // action is not annotated or from different module
+                continue;
+            }
+            final ActionConfig actionConfig = ActionConfigBuilderFactory.getActionConfigBuilder(
+                    clazz, actionMapping).actionConfig();
+            updateFormBeanConfig(actionMapping, actionConfig, moduleConfig);
+            for (Field field : StrutsAnnotationsScanner.findFields(clazz)) {
+                updateForwardConfig(field, actionConfig);
+            }
+            moduleConfig.addActionConfig(actionConfig);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Added action mapping " + actionConfig);
+            }
         }
     }
 
@@ -149,6 +148,16 @@ public class StrutsAnnotationsPlugin implements PlugIn {
     private static void updateForwardConfig(final Field field, final ActionConfig actionConfig)
             throws IllegalAccessException {
         actionConfig.addForwardConfig(new ForwardConfigBuilder(field).build());
+    }
+
+    /**
+     * @param clazz
+     * @return array of StrutsAction annotations
+     */
+    private static StrutsAction[] getAnnotations(Class<?> clazz) {
+        return clazz.isAnnotationPresent(StrutsAction.class) ? new StrutsAction[] { clazz
+                .getAnnotation(StrutsAction.class) } : clazz.getAnnotation(StrutsActions.class)
+                .value();
     }
 
 }
