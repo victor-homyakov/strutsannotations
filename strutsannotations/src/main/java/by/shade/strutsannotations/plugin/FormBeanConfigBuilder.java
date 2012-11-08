@@ -31,11 +31,19 @@ public class FormBeanConfigBuilder {
 
     private final Class<? extends ActionForm> formClass;
 
+    /**
+     * Creates config builder for the Struts action class annotated with {@link StrutsAction}.
+     *
+     * @param clazz
+     *            class of Struts action
+     */
     public FormBeanConfigBuilder(final Class<? extends Action> clazz) {
         this(clazz.getAnnotation(StrutsAction.class));
     }
 
     /**
+     * Creates config builder for the Struts action class.
+     *
      * @param annotation
      *            annotation of an action, with form bean configuration (<code>name</code> and
      *            <code>form</code>)

@@ -1,7 +1,6 @@
 package by.shade.strutsannotations.plugin;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.apache.struts.action.Action;
 import org.junit.Test;
@@ -17,27 +16,27 @@ public class StrutsActionsTest {
 
     @Test
     public void testDefaultAnnotation() {
-        Class<EmptyClassAction> c = EmptyClassAction.class;
-        StrutsActions sa = c.getAnnotation(StrutsActions.class);
-        assertTrue(sa.value().length == 1);
-        assertAction("/emptyClass", "", c, sa.value()[0]);
+        Class<EmptyClassAction> action = EmptyClassAction.class;
+        StrutsActions sa = action.getAnnotation(StrutsActions.class);
+        assertEquals(1, sa.value().length);
+        assertAction("/emptyClass", "", action, sa.value()[0]);
     }
 
     @Test
     public void testTwoSubAnnotations() {
-        Class<TestClassAction> c = TestClassAction.class;
-        StrutsActions sa = c.getAnnotation(StrutsActions.class);
-        assertTrue(sa.value().length == 2);
-        assertAction("/path1", "method1", c, sa.value()[0]);
-        assertAction("/path2", "method2", c, sa.value()[1]);
+        Class<TestClassAction> action = TestClassAction.class;
+        StrutsActions sa = action.getAnnotation(StrutsActions.class);
+        assertEquals(2, sa.value().length);
+        assertAction("/path1", "method1", action, sa.value()[0]);
+        assertAction("/path2", "method2", action, sa.value()[1]);
     }
 
     private static void assertAction(String expectedPath, String expectedDefMethod,
             Class<? extends Action> clazz, StrutsAction annotation) {
         IActionConfigBuilder builder = new ActionConfigBuilder(clazz, annotation);
         // assertEquals(expectedPath, annotation.path());
-        assertEquals(expectedPath, builder.actionConfig().getPath());
-        assertEquals(expectedDefMethod, annotation.defaultMethod());
+        assertEquals("Path", expectedPath, builder.actionConfig().getPath());
+        assertEquals("Default method", expectedDefMethod, annotation.defaultMethod());
         // ActionConfigBuilder builder = new ActionConfigBuilder(clazz, annotation);
         // assertEquals("Default path", expected, builder.getDefaultActionPath());
     }

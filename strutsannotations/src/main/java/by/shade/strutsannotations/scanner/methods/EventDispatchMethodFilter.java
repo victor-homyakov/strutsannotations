@@ -33,13 +33,13 @@ public class EventDispatchMethodFilter implements IMethodFilter {
      *         HttpServletRequest, HttpServletResponse)</code>
      */
     public boolean methodMatches(Method method) {
-        return testVisibility(method) && testReturnType(method) && testParameters(method);
+        return checkVisibility(method) && checkReturnType(method) && checkParameters(method);
     }
 
     /**
      * @return true for public method: <code>public {type} {name}({params})</code>
      */
-    private static boolean testVisibility(Method method) {
+    private static boolean checkVisibility(Method method) {
         return Modifier.isPublic(method.getModifiers());
     }
 
@@ -47,7 +47,7 @@ public class EventDispatchMethodFilter implements IMethodFilter {
      * @return true for method with {@link ActionForward} return type (method may actually return ?
      *         extends ActionForward): <code>{visibility} ActionForward {name}({params})</code>
      */
-    private static boolean testReturnType(Method method) {
+    private static boolean checkReturnType(Method method) {
         return ActionForward.class.isAssignableFrom(method.getReturnType());
     }
 
@@ -55,7 +55,7 @@ public class EventDispatchMethodFilter implements IMethodFilter {
      * @return true for method with 4 desired parameters: <code>{visibility} {type} {name}
      *         (ActionMapping, ActionForm, HttpServletRequest, HttpServletResponse)</code>
      */
-    private static boolean testParameters(Method method) {
+    private static boolean checkParameters(Method method) {
         final Class<?>[] parameterTypes = method.getParameterTypes();
         if (parameterTypes.length != PARAMETER_TYPES.length) {
             return false;
