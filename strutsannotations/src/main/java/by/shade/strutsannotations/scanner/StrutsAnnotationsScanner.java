@@ -1,5 +1,6 @@
 package by.shade.strutsannotations.scanner;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
@@ -24,15 +25,14 @@ public final class StrutsAnnotationsScanner {
      * Search for annotated actions.
      *
      * @param classPath
-     *            class path
+     *            class path, should point to existing directory
      * @return list of annotated actions found in class loader
      * @throws ClassNotFoundException
      *             on class loader errors
      */
-    public static Collection<Class<?>> findActions(final String classPath)
+    public static Collection<Class<?>> findActions(final File classPath)
             throws ClassNotFoundException {
-        return new ClassScanner(classPath, Thread.currentThread().getContextClassLoader(), "")
-                .list(new ActionClassFilter());
+        return new ClassScanner(classPath, "").list(new ActionClassFilter());
     }
 
     /**

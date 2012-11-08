@@ -3,6 +3,11 @@ package by.shade.strutsannotations.scanner.classes;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Collection;
 
 import org.junit.Before;
@@ -19,14 +24,28 @@ import by.shade.strutsannotations.scanner.classes.resources.ClassWithAnnotation;
  * @version $Id$
  */
 public class ActionClassFilterTest {
-    private final String classPath = getClass().getResource("/").getPath();
-    private final String classPathWithoutSlash = classPath.substring(0, classPath.lastIndexOf("/"));
+    private final File classPath = getResourceFile("/");
+
     private Collection<Class<?>> list;
+
+    public File getResourceFile(String resource) {
+        URL url = getClass().getResource(resource);
+        try {
+            return new File(url.toURI());
+        } catch (URISyntaxException e1) {
+            // e.printStackTrace();
+            try {
+                return new File(URLDecoder.decode(url.getPath(), "UTF-8"));
+            } catch (UnsupportedEncodingException e2) {
+                // this should not happen
+                throw new RuntimeException(e2);
+            }
+        }
+    }
 
     @Before
     public void setUp() throws ClassNotFoundException {
-        list = new ClassScanner(classPathWithoutSlash, Thread.currentThread()
-                .getContextClassLoader(), ClassAction.class.getPackage().getName())
+        list = new ClassScanner(classPath, ClassAction.class.getPackage().getName())
                 .list(new ActionClassFilter());
     }
 

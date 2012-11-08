@@ -2,6 +2,7 @@ package by.shade.strutsannotations;
 
 import javax.servlet.ServletException;
 
+import org.apache.struts.action.RequestProcessor;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.config.PlugInConfig;
 
@@ -22,10 +23,8 @@ public class ActionServlet extends org.apache.struts.action.ActionServlet {
             .getCanonicalName();
     private static final PlugInConfig PLUGIN_CONFIG = createPlugInConfig();
 
-    // private static final String DEFAULT_PROCESSOR_CLASS_NAME =
-    // "org.apache.struts.action.RequestProcessor";
-    private static final String DEFAULT_PROCESSOR_CLASS_NAME = org.apache.struts.action.RequestProcessor.class
-            .getCanonicalName();
+    private static final String DEFAULT_PROCESSOR_CLASS_NAME = RequestProcessor.class
+            .getCanonicalName(); // "org.apache.struts.action.RequestProcessor"
     private static final String PROCESSOR_CLASS_NAME = MoreDescriptiveRequestProcessor.class
             .getCanonicalName();
 
