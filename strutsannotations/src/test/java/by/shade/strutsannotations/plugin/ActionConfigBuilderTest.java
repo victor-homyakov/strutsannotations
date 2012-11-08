@@ -108,6 +108,7 @@ public class ActionConfigBuilderTest {
      */
     @StrutsAction(path = "/a1")
     class EmptyAction extends Action {
+        // empty
     }
 
     /**
@@ -115,6 +116,7 @@ public class ActionConfigBuilderTest {
      */
     @StrutsAction
     class AnotherEmptyAction extends Action {
+        // empty
     }
 
     /**
@@ -122,6 +124,7 @@ public class ActionConfigBuilderTest {
      */
     @StrutsAction
     class XXLAction extends Action {
+        // empty
     }
 
 }

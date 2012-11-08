@@ -25,9 +25,9 @@ public class ForwardConfigBuilderTest {
         assertEquals(3, fields.size());
         boolean f1 = false, f2 = false, f3 = false;
         for (Field field : fields) {
-            f1 = f1 || "forward1".equals(field.getName());
-            f2 = f2 || "forward2".equals(field.getName());
-            f3 = f3 || "forward3".equals(field.getName());
+            f1 = f1 || "FORWARD1".equals(field.getName());
+            f2 = f2 || "FORWARD2".equals(field.getName());
+            f3 = f3 || "FORWARD3".equals(field.getName());
         }
         assertTrue(f1);
         assertTrue(f2);
@@ -36,9 +36,9 @@ public class ForwardConfigBuilderTest {
 
     @Test
     public void testForward() throws Exception {
-        assertForward("forward1", "forward1", "/forward1.jsp", "/module");
-        assertForward("forward2", "forward2", "/forward2.jsp", null);
-        assertForward("forward3", "/forward3.jsp", "/forward3.jsp", null);
+        assertForward("FORWARD1", "forward1", "/forward1.jsp", "/module");
+        assertForward("FORWARD2", "forward2", "/forward2.jsp", null);
+        assertForward("FORWARD3", "/forward3.jsp", "/forward3.jsp", null);
     }
 
     private static void assertForward(String fieldName, String name, String path, String module)
@@ -51,15 +51,12 @@ public class ForwardConfigBuilderTest {
     }
 
     class NewAction extends Action {
-        @SuppressWarnings("unused")
         @StrutsForward(module = "/module", path = "/forward1.jsp")
-        private static final String forward1 = "forward1";
-        @SuppressWarnings("unused")
+        private static final String FORWARD1 = "forward1";
         @StrutsForward(path = "/forward2.jsp")
-        private static final String forward2 = "forward2";
-        @SuppressWarnings("unused")
+        private static final String FORWARD2 = "forward2";
         @StrutsForward
-        private static final String forward3 = "/forward3.jsp";
+        private static final String FORWARD3 = "/forward3.jsp";
     }
 
 }
