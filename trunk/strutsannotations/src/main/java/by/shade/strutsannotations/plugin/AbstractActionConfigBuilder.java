@@ -15,6 +15,9 @@ import by.shade.strutsannotations.StrutsAction;
  */
 public abstract class AbstractActionConfigBuilder<T> implements IActionConfigBuilder {
 
+    private static final String ACTION_SUFFIX = "Action";
+    private static final int ACTION_SUFFIX_LEN = ACTION_SUFFIX.length(); // 6
+
     /**
      * Class of an Action.
      */
@@ -26,6 +29,9 @@ public abstract class AbstractActionConfigBuilder<T> implements IActionConfigBui
     protected final StrutsAction annotation;
 
     /**
+     * Create configuration builder for class with single StrutsAction annotation. Retrieve
+     * StrutsAction annotation from class.
+     *
      * @param clazz
      *            class of Action
      */
@@ -34,10 +40,13 @@ public abstract class AbstractActionConfigBuilder<T> implements IActionConfigBui
     }
 
     /**
+     * Create configuration builder for class with StrutsActions annotation (multiple StrutsAction
+     * annotations).
+     *
      * @param clazz
      *            class of Action
      * @param annotation
-     *            annotation
+     *            desired StrutsAction annotation
      */
     public AbstractActionConfigBuilder(final Class<? extends T> clazz, final StrutsAction annotation) {
         this.clazz = clazz;
@@ -91,8 +100,8 @@ public abstract class AbstractActionConfigBuilder<T> implements IActionConfigBui
     protected String getDefaultActionPath() {
         String name = clazz.getSimpleName();
         return "/"
-                + uncapitalize(name.endsWith("Action") ? name.substring(0, name.length() - 6)
-                        : name);
+                + uncapitalize(name.endsWith(ACTION_SUFFIX) ? name.substring(0, name.length()
+                        - ACTION_SUFFIX_LEN) : name);
     }
 
     // TODO unify with FormBeanConfigBuilder

@@ -37,7 +37,8 @@ public class FormBeanConfigBuilder {
 
     /**
      * @param annotation
-     *            annotation of an action, with form bean configuration (<code>name</code> and <code>form</code>)
+     *            annotation of an action, with form bean configuration (<code>name</code> and
+     *            <code>form</code>)
      */
     public FormBeanConfigBuilder(final StrutsAction annotation) {
         Class<? extends ActionForm> form = annotation.form();
@@ -87,8 +88,8 @@ public class FormBeanConfigBuilder {
     }
 
     /**
-     * Updates ModuleConfig. Adds the configuration of form bean, if it is not already present
-     * (many actions may refer to single form bean) and can be created.
+     * Updates ModuleConfig. Adds the configuration of form bean, if it is not already present (many
+     * actions may refer to single form bean) and can be created.
      *
      * @param moduleConfig
      *            configuration of current module
