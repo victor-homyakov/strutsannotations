@@ -29,18 +29,23 @@ public class ActionConfigBuilderFactoryTest {
     }
 
     class ExtAction extends Action {
+        // empty
     }
 
     class ExtExtAction extends ExtAction {
+        // empty
     }
 
     class ExtDispatchAction extends DispatchAction {
+        // empty
     }
 
     class ExtEventDispatchAction extends EventDispatchAction {
+        // empty
     }
 
     class ExtExtEventDispatchAction extends ExtEventDispatchAction {
+        // empty
     }
 
 }
