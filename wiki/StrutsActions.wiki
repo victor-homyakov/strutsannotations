@@ -1,0 +1,5 @@
+#summary Annotation for Struts Actions.
+
+= Introduction =
+
+Describes an array of StrutsAction annotations.
