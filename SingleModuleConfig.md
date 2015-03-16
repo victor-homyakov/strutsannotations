@@ -1,0 +1,51 @@
+# Introduction #
+
+How to add annotations to single Struts module.
+
+
+# Details #
+
+In order to use StrutsAction and StrutsForward annotations you need to add Struts annotations processing plugin to configuration of Struts module.
+
+Insert into struts-config.xml near the end of file:
+```
+  <struts-config>
+    ... your content ...
+    <plug-in className="by.shade.strutsannotations.plugin.StrutsAnnotationsPlugin" />
+  </struts-config>
+```
+
+Now content of struts-config.xml:
+
+```
+    <action path="/addMember" type="test.stuts.StrutsDemoAction"
+        name="strutsDemoForm" input="/addMember.do" scope="request"
+        parameter="a=b" validate="true">
+      <forward name="success" path="/showMembers.do" redirect="true" />
+      <forward name="failure" path="/addMember.do" />
+    </action>
+```
+
+can be pretty straightforward replaced with annotations:
+
+```
+@StrutsAction(path="/addMember", name="strutsDemoForm", form=StrutsDemoForm.class,
+  input="/addMember.do", scope="request", parameter="a=b", validate=true)
+public class StrutsDemoAction extends Action {
+
+  @StrutsForward(redirect=true)
+  public static final String SUCCESS = "/showMembers.do";
+
+  @StrutsForward()
+  public static final String FAILURE = "/addMember.do";
+
+  ... execute(...) {
+    try {
+      ...
+      return mapping.findForward(SUCCESS);
+    } catch (Exception e) {
+      return mapping.findForward(FAILURE);
+    }
+  }
+}
+```
